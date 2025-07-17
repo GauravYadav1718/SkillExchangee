@@ -55,7 +55,7 @@ skillswap-fullstack/
 - **Frontend:** React, Vite, Tailwind CSS, React Router
 - **Backend:** Node.js, Express, MongoDB, Mongoose
 - **Authentication:** JWT, bcryptjs
-- **Database:** MongoDB Atlas
+- **Database:** MongoDB
 
 ## Development Progress
 
