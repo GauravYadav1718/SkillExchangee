@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Get user's requests (sent and received)
+
 router.get('/', auth, async (req, res) => {
   try {
     const sent = await Request.find({ from: req.user._id })
@@ -24,7 +24,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// Send request
+
 router.post('/', [auth, [
   body('to').isMongoId(),
   body('skill').isMongoId(),
@@ -38,7 +38,6 @@ router.post('/', [auth, [
 
     const { to, skill, message } = req.body;
 
-    // Check if request already exists
     const existingRequest = await Request.findOne({
       from: req.user._id,
       to,
@@ -66,7 +65,6 @@ router.post('/', [auth, [
   }
 });
 
-// Update request status
 router.put('/:id', auth, async (req, res) => {
   try {
     const request = await Request.findById(req.params.id);
@@ -95,7 +93,7 @@ router.put('/:id', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-// GET /api/requests/accepted-users
+
 router.get('/accepted-users', auth, async (req, res) => {
   try {
     const userId = req.user._id;
