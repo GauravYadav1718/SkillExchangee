@@ -2,15 +2,15 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const Message = require('../models/Message');
 const auth = require('../middleware/auth');
-const User = require('../models/User'); // Adjust the path if necessary
+const User = require('../models/User'); 
 
 
 const router = express.Router();
 
-// Get all conversations for the authenticated user
+
 router.get('/conversations', auth, async (req, res) => {
   try {
-    // Get unique conversations by finding all users who have messaged with current user
+  
     const conversations = await Message.aggregate([
       {
         $match: {
@@ -93,7 +93,7 @@ router.get('/conversations/:userId/messages', auth, async (req, res) => {
   }
 });
 
-// Send a message
+
 
 router.post(
   '/send',
@@ -113,18 +113,14 @@ router.post(
 
       const { receiverEmail, content } = req.body;
 
-      // Find the user by email
       const receiver = await User.findOne({ email: receiverEmail });
       if (!receiver) {
         return res.status(404).json({ message: 'Receiver not found' });
       }
 
-      // Prevent sending messages to self
       if (receiver._id.toString() === req.user._id.toString()) {
         return res.status(400).json({ message: 'Cannot send message to yourself' });
       }
-
-      // Create and save message
       const message = new Message({
         content,
         sender: req.user._id,
@@ -143,7 +139,7 @@ router.post(
   }
 );
 
-// Get all messages (inbox)
+
 router.get('/inbox', auth, async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
@@ -166,7 +162,7 @@ router.get('/inbox', auth, async (req, res) => {
   }
 });
 
-// Get sent messages
+
 router.get('/sent', auth, async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
@@ -184,7 +180,7 @@ router.get('/sent', auth, async (req, res) => {
   }
 });
 
-// Get received messages
+
 router.get('/received', auth, async (req, res) => {
   try {
     const { page = 1, limit = 20 } = req.query;
@@ -202,7 +198,7 @@ router.get('/received', auth, async (req, res) => {
   }
 });
 
-// Delete a message
+
 router.delete('/:messageId', auth, async (req, res) => {
   try {
     const message = await Message.findById(req.params.messageId);
@@ -211,7 +207,6 @@ router.delete('/:messageId', auth, async (req, res) => {
       return res.status(404).json({ message: 'Message not found' });
     }
 
-    // Only sender can delete the message
     if (message.sender.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: 'Not authorized' });
     }
@@ -223,7 +218,7 @@ router.delete('/:messageId', auth, async (req, res) => {
   }
 });
 
-// Search messages
+
 router.get('/search', auth, async (req, res) => {
   try {
     const { q, userId } = req.query;
@@ -240,7 +235,6 @@ router.get('/search', auth, async (req, res) => {
       ]
     };
 
-    // If userId is provided, search only in conversation with that user
     if (userId) {
       searchQuery.$or = [
         { sender: req.user._id, receiver: userId },
@@ -260,7 +254,7 @@ router.get('/search', auth, async (req, res) => {
   }
 });
 
-// Get message count (total messages for user)
+
 router.get('/count', auth, async (req, res) => {
   try {
     const totalMessages = await Message.countDocuments({
