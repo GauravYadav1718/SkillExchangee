@@ -5,7 +5,6 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Get all skills with search, category, level, and sorting
 router.get('/', async (req, res) => {
   try {
     const { search, category, level, sort } = req.query;
@@ -26,7 +25,7 @@ router.get('/', async (req, res) => {
       query.level = level;
     }
 
-    let sortOptions = { createdAt: -1 }; // default
+    let sortOptions = { createdAt: -1 }; 
     if (sort === 'alphabetical') {
       sortOptions = { title: 1 };
     } else if (sort === 'rating') {
@@ -44,7 +43,7 @@ router.get('/', async (req, res) => {
 });
 
 
-// Get user's skills
+
 router.get('/my-skills', auth, async (req, res) => {
   try {
     const skills = await Skill.find({ user: req.user._id })
@@ -56,7 +55,7 @@ router.get('/my-skills', auth, async (req, res) => {
   }
 });
 
-// Create skill
+
 router.post('/', [auth, [
   body('title').trim().isLength({ min: 2 }),
   body('description').trim().isLength({ min: 10 }),
@@ -87,7 +86,7 @@ router.post('/', [auth, [
   }
 });
 
-// Update skill
+
 router.put('/:id', auth, async (req, res) => {
   try {
     const skill = await Skill.findById(req.params.id);
@@ -116,7 +115,6 @@ router.put('/:id', auth, async (req, res) => {
   }
 });
 
-// Delete skill
 router.delete('/:id', auth, async (req, res) => {
   try {
     const skill = await Skill.findById(req.params.id);
