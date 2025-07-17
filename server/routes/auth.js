@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// ✅ Register
+
 router.post('/register', [
   body('name').trim().isLength({ min: 2 }).withMessage("Name must be at least 2 characters"),
   body('email').isEmail().withMessage("Invalid email"),
@@ -45,7 +45,7 @@ router.post('/register', [
   }
 });
 
-// ✅ Login (no select, because password is returned by default)
+
 router.post('/login', [
   body('email').isEmail().withMessage("Invalid email"),
   body('password').exists().withMessage("Password is required")
@@ -58,7 +58,6 @@ router.post('/login', [
 
     const { email, password } = req.body;
 
-    // ✅ No .select() needed, because password is returned by default
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
@@ -85,7 +84,6 @@ router.post('/login', [
   }
 });
 
-// ✅ Get Current User
 router.get('/me', auth, async (req, res) => {
   try {
     res.json({
