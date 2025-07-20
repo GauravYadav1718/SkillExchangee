@@ -1,9 +1,9 @@
-SkillSwap - Exchange Your Skills, Grow Together 🌐
+**SkillSwap - Exchange Your Skills, Grow Together 🌐**
 
 A Skill Exchange Platform built with the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to connect, share expertise, and learn from others. Users can offer skills, request to learn, and exchange knowledge through messaging.
 
 
-✨ Features
+**✨ Features**
 
 ✅ User Authentication (Register / Login)
 
@@ -17,7 +17,8 @@ A Skill Exchange Platform built with the MERN stack (MongoDB, Express.js, React.
 
 ✅ Categories, Levels & Filters for Skills
 
-🖥️ Live Preview (Screenshots)
+
+**🖥️ Live Preview (Screenshots)**
 
 ### 1️⃣ Home Page  
 ![Home Page](assets/home.png)  
@@ -46,13 +47,17 @@ A Skill Exchange Platform built with the MERN stack (MongoDB, Express.js, React.
 ### 9️⃣ Login Page  
 ![Login Page](assets/login.png)  
 
-🚀 Tech Stack
+
+**🚀 Tech Stack**
+
 Frontend	Backend	Database	Other
+
 React.js	Node.js	MongoDB	JWT Auth
+
 TailwindCSS	Express	Mongoose	bcrypt.js
 
 
-📌 Core Pages Overview
+**📌 Core Pages Overview**
 
 Page	URL
 
@@ -72,26 +77,14 @@ Requests	/requests
 
 Messages	/messages
 
-💡 Future Enhancements
 
-Notifications System
 
-Rating & Feedback for Skills
-
-Calendar / Scheduling
-
-AI Skill Suggestions
-
-🤝 Contributing
-
-Pull requests are welcome!
-If you find issues, please open an issue or submit a PR.
-
-📄 License
+**📄 License**
 
 This project is licensed under the MIT License.
 
-🌟 Show your support!
+**🌟 Show your support!**
+
 
 If you liked this project, give it a ⭐️ on GitHub!
 
